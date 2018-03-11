@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import ValidationComponent from './ValidationComponent/ValidationComponent';
-import CharComponent from './CharComponent/CharComponent';
+import Validation from './Validation/Validation';
+import Char from './Char/Char';
 
 class App extends Component {
   state = {
-    textValue: '',
-    textLength: 0
+    textValue: ''
   }
 
   changeListener = (event) => {
     this.setState({
-      textValue: event.target.value,
-      textLength: event.target.value.length,
+      textValue: event.target.value
     })
   }
 
@@ -21,8 +19,7 @@ class App extends Component {
     text.splice(index, 1);
     text = text.join('');
     this.setState({
-      textValue: text,
-      textLength: text.length
+      textValue: text
     });
   }
 
@@ -30,7 +27,7 @@ class App extends Component {
     let chars = (
       <div>
         {[...this.state.textValue].map( (char, index) => {
-          return <CharComponent 
+          return <Char
               char={char}
               key={index}
               click={() => this.deleteCharHandler(index)}
@@ -46,8 +43,8 @@ class App extends Component {
           value={this.state.textValue}
           onChange={this.changeListener}
         />
-        <ValidationComponent 
-          textLength={this.state.textLength}
+        <Validation
+          textLength={this.state.textValue.length}
         />
         {chars}
       </div>
